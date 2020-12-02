@@ -106,9 +106,62 @@
 
 
          function playGame(){
-        //      
+        
         // generate game results --> assign to arrays (this pretty much HW5 copy and past would be helpful)
+            var byu = new Team();
+            byu.teamName = aTeams[0];
+        
+            var gonzaga = new Team();
+            var loyala = new Team();
+            var pacific = new Team();
+            var pepperdine = new Team();
+            var portland = new Team();
+            var stMarys = new Team();
+            var sanDiego = new Team();
+            var sanFran = new Team();
+            var santaClara = new Team();
 
+            var numGames = ((allTeams.length - 1)*2);
+            var myTeamScores = [];
+            var otherTeamScores = [];
+
+            for (i=1;i<=numGames;i++) {
+                //create random score for 2 teams
+                teamName = aTeams[(i+1)];
+                var myScore = Math.floor(Math.random() * 101);
+                var theirScore = Math.floor(Math.random() * 101);
+            
+                //if game number is even, game is away--otherScore gets 5 points added
+                if (i % 2 == 0 && myScore != theirScore) {
+                    myScore = theirScore
+                    theirScore = theirScore + 5
+                }
+                //if game number is odd, game is home--teamScoree gets 5 points added
+                else if (myScore != theirScore) {
+                    myScore = myScore + 5 
+                    theirScore = theirScore
+                }
+                //if game is tied, play until someone wins, then add number of OTs to array
+                else {
+                    do {
+                    myScore = myScore + Math.floor(Math.random() * 16);
+                    theirScore = theirScore + Math.floor(Math.random() * 16);
+                    }
+                while (myScore === theirScore);  
+                }
+            
+            
+                
+                for (iWin=0;iWin<numGames;iWin++) {
+                    if (myTeamScores[iWin] > otherTeamScores[iWin]) {
+                        wins = wins + 1
+                    } 
+                    else if (myTeamScores[iWin] < otherTeamScores[iWin]) {
+                        losses = losses + 1
+                    }
+            } 
+            }
+            }
         // sort arrays
 
         // document.getElementById("output").value = seasonResults    
