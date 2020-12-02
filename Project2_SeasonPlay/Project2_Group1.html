@@ -29,57 +29,84 @@
     <script>
          // Place variable and object info here
         // Local Variables
-        aTeams = [];
-
-        class Game {
+        var aTeams = [];
+  
+        class Team {
         /*** Define Attributes***/
-        myScore;
-        theirScore;
-        winOrLoss;
+        teamName;
+        wins;
+        losses;
+        winLossPct;
+        games = new Game();
 
-        theirScore()
         /*** define Constructor***/
             constructor () {
-                
+                class Game {
+                    myScore;
+                    theirScore;
+                    winOrLoss;
+                    
+                    constructor(myScore, theirScore, winOrLoss){
+                    }
+                }
+
             }
+
         /*** Define Method***/
         getTeam() {
-
+            //returns TeamName
+            return this.teamName;
         }
-        setTeam() {
-
-        }
-        setWinsLosses() {
-
+        setTeam(pTeamName) {
+            //receives parameter used to set instance variable teamName
+            this.teamName = pTeamName;
         }
         getWins() {
-
+            //returns number of wins
+            return this.wins;
         }
         getLosses() {
-
+            //returns number of losses
+            return this.losses;
         }
         calcWinLossPct(){
+            //calculates and updates winLossPct
+            return getWins() / getLosses();
+        }
+        setWinsLosses(pWins, pLosses) {
+            //receives TWO parameters used to set wins and losses variables
+            //calculate winLossPct variable
+            this.wins = pWins;
+            this.losses = pLosses;
+            this.winLossPct = calcWinLossPct();
+        }
 
-        }}
+        }
         // Build the child object extending Parent
-        class BasketballTeam extends Game {
+        class BasketballTeam extends Team {
             /*** Define Attributes***/
             totalPointsFor;
             totalPointsAgainst;
 
             /*** define Constructor***/
             constructor() {
-
+                super();
             }
             /*** Define Method***/
-            addPointsFor() {
-
+            addPointsFor(pInt) {
+                //receives int parameter
+                // value is added to totalPointsFor instance variable;
+                this.totalPointsFor = pInt + this.totalPointsFor;
             }
-            addPointsAgainst(){
-
+            addPointsAgainst(pInt2){
+                // receives int parameter
+                //value added to totalPointsAgainst
+                this.totalPointsAgainst = pInt2 + this.totalPointsFor;
             }
             getAllPoints(){
-
+                //returns a string with totalPointsFor and totalPointsAgainst
+                // "Points for XX and Points Against XX where XX is the values of the instance variables"
+                return "Points for " + this.totalPointsFor + "and Points Against " + this.totalPointsAgainst;
             }}
         
 
@@ -90,7 +117,7 @@
 
         // sort arrays
 
-         document.getElementById("output").value = seasonResults    
+        // document.getElementById("output").value = seasonResults    
          }
 
     </script>
