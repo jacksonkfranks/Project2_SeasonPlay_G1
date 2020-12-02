@@ -29,40 +29,58 @@
     <script>
          // Place variable and object info here
         // Local Variables
-        aTeams = [];
-
-        class Game {
+        var aTeams = [];
+        
+        for (i = 1; i <= 20; ++i)  {
+            aTeams.push(document.getElementById("teamList").childNodes[i].innerHTML);
+            i++;
+        }
+        class Team {
         /*** Define Attributes***/
-        myScore;
-        theirScore;
-        winOrLoss;
+        teamName;
+        wins;
+        losses;
+        winLossPct;
+        games = new Game;
 
-        theirScore()
         /*** define Constructor***/
             constructor () {
-                
+                class Game {
+                    myScore;
+                    theirScore;
+                    winOrLoss;
+                    
+                    constructor(myScore, theirScore, winOrLoss){
+
+                    }
+                }
+
             }
         /*** Define Method***/
         getTeam() {
-
+            //returns TeamName
         }
-        setTeam() {
-
+        setTeam(pTeamName) {
+            //receives parameter used to set instance variable teamName
+            //this.teamName = pTeamName;
         }
-        setWinsLosses() {
-
+        setWinsLosses(pWins, pLosses) {
+            //receives TWO parameters used to set wins and losses variables
+            //calculate winLossPct variable
         }
         getWins() {
-
+            //returns number of wins
         }
         getLosses() {
-
+            //returns number of losses
         }
         calcWinLossPct(){
+            //calculates and updates winLossPct
+        }
 
-        }}
+        }
         // Build the child object extending Parent
-        class BasketballTeam extends Game {
+        class BasketballTeam extends Team {
             /*** Define Attributes***/
             totalPointsFor;
             totalPointsAgainst;
@@ -72,14 +90,17 @@
 
             }
             /*** Define Method***/
-            addPointsFor() {
-
+            addPointsFor(pInt) {
+                //receives int parameter
+                // value is added to totalPointsFor instance variable;
             }
             addPointsAgainst(){
-
+                // recieves int parameter
+                //value added to totalPointsAgainst
             }
             getAllPoints(){
-
+                //returns a string with totalPointsFor and totalPointsAgainst
+                // "Points for XX and Points Against XX where XX is the values of the instance variables"
             }}
         
 
@@ -90,7 +111,7 @@
 
         // sort arrays
 
-         document.getElementById("output").value = seasonResults    
+        // document.getElementById("output").value = seasonResults    
          }
 
     </script>
