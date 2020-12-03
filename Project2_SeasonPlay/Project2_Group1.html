@@ -30,29 +30,35 @@
 
          // Place variable and object info here
         // Local Variables
-        var aTeams = [];
-  
-        class Team {
+   class Team {
         /*** Define Attributes***/
         teamName;
         wins;
         losses;
         winLossPct;
-        games = new Game();
+        games;
 
         /*** define Constructor***/
             constructor () {
+                this.teamName = "";
+                this.wins = 0; 
+                this.losses = 0;
+                this.winLossPct = 0;
+
+
                 class Game {
                     myScore;
                     theirScore;
                     winOrLoss;
                     
-                    constructor(myScore, theirScore, winOrLoss){
+                    constructor(pMyScore, pTheirScore,pWinOrLoss){
+                        this.myScore = pMyScore;
+                        this.theirScore = pTheirScore;
+                        this.winOrLoss = pWinOrLoss;
                     }
                 }
 
             }
-
         /*** Define Method***/
         getTeam() {
             //returns TeamName
@@ -60,7 +66,17 @@
         }
         setTeam(pTeamName) {
             //receives parameter used to set instance variable teamName
-            this.teamName = pTeamName;
+            let aTeamName = "";
+            aTeamName = aTeams[pTeamName];
+            this.teamName = aTeamName;
+        }
+        setWinsLosses(pWins, pLosses) {
+            //receives TWO parameters used to set wins and losses variables
+            this.wins+=pWins;
+            this.losses+=pLosses;
+            //calculate winLossPct variable
+            calcWinLossPct();
+
         }
         getWins() {
             //returns number of wins
@@ -72,18 +88,10 @@
         }
         calcWinLossPct(){
             //calculates and updates winLossPct
-            return getWins() / getLosses();
-        }
-        setWinsLosses(pWins, pLosses) {
-            //receives TWO parameters used to set wins and losses variables
-            //calculate winLossPct variable
-            this.wins = pWins;
-            this.losses = pLosses;
-            this.winLossPct = calcWinLossPct();
+            return this.wins / this.losses;
         }
 
         }
-
         // Build the child object extending Parent
         class BasketballTeam extends Team {
             /*** Define Attributes***/
@@ -93,28 +101,26 @@
             /*** define Constructor***/
             constructor() {
                 super();
+                this.totalPointsAgainst= 0;
+                this.totalPointsFor=0;
             }
             /*** Define Method***/
             addPointsFor(pInt) {
                 //receives int parameter
                 // value is added to totalPointsFor instance variable;
-
-                this.totalPointsFor = pInt + this.totalPointsFor;
+                this.totalPointsFor +=pInt;
             }
             addPointsAgainst(pInt2){
                 // receives int parameter
                 //value added to totalPointsAgainst
-                this.totalPointsAgainst = pInt2 + this.totalPointsFor;
-
+                this.totalPointsAgainst +=pInt2;
             }
-
-           
             getAllPoints(){
                 //returns a string with totalPointsFor and totalPointsAgainst
                 // "Points for XX and Points Against XX where XX is the values of the instance variables"
-
-                return "Points for " + this.totalPointsFor + "and Points Against " + this.totalPointsAgainst;
-            }}
+                return "Points for " + this.totalPointsFor + " and Points Against " + this.totalPointsAgainst;
+            }
+        }
 
          
         // Place variable and object info here
