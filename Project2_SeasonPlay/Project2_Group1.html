@@ -27,54 +27,62 @@
     <p id="output"></p>    
     </form>
     <script>
-         
 
-        class Game {
-            myScore;
-            theirScore;
-            winOrLoss;
-            
-            // constructor(myScore, theirScore, winOrLoss){
-
-            // }
-
-        }
-
+         // Place variable and object info here
+        // Local Variables
+        var aTeams = [];
+  
         class Team {
-            /*** Define Attributes***/
-            teamName;
-            wins;
-            losses;
-            winLossPct;
-            games = [];
+        /*** Define Attributes***/
+        teamName;
+        wins;
+        losses;
+        winLossPct;
+        games = new Game();
 
-            /*** define Constructor***/
-            // constructor () {
-                
-            // }
-            /*** Define Method***/
-            getTeam() {
-                //returns TeamName
+        /*** define Constructor***/
+            constructor () {
+                class Game {
+                    myScore;
+                    theirScore;
+                    winOrLoss;
+                    
+                    constructor(myScore, theirScore, winOrLoss){
+                    }
+                }
+
             }
-            setTeam(pTeamName) {
-                //receives parameter used to set instance variable teamName
-                //this.teamName = pTeamName;
-            }
-            setWinsLosses(pWins, pLosses) {
-                //receives TWO parameters used to set wins and losses variables
-                //calculate winLossPct variable
-            }
-            getWins() {
-                //returns number of wins
-            }
-            getLosses() {
-                //returns number of losses
-            }
-            calcWinLossPct(){
-                //calculates and updates winLossPct
-            }
+
+        /*** Define Method***/
+        getTeam() {
+            //returns TeamName
+            return this.teamName;
         }
-        
+        setTeam(pTeamName) {
+            //receives parameter used to set instance variable teamName
+            this.teamName = pTeamName;
+        }
+        getWins() {
+            //returns number of wins
+            return this.wins;
+        }
+        getLosses() {
+            //returns number of losses
+            return this.losses;
+        }
+        calcWinLossPct(){
+            //calculates and updates winLossPct
+            return getWins() / getLosses();
+        }
+        setWinsLosses(pWins, pLosses) {
+            //receives TWO parameters used to set wins and losses variables
+            //calculate winLossPct variable
+            this.wins = pWins;
+            this.losses = pLosses;
+            this.winLossPct = calcWinLossPct();
+        }
+
+        }
 
         // Build the child object extending Parent
         class BasketballTeam extends Team {
@@ -84,36 +92,52 @@
 
             /*** define Constructor***/
             constructor() {
-
+                super();
             }
             /*** Define Method***/
             addPointsFor(pInt) {
                 //receives int parameter
                 // value is added to totalPointsFor instance variable;
+
+                this.totalPointsFor = pInt + this.totalPointsFor;
             }
-            addPointsAgainst(){
-                // recieves int parameter
+            addPointsAgainst(pInt2){
+                // receives int parameter
                 //value added to totalPointsAgainst
+                this.totalPointsAgainst = pInt2 + this.totalPointsFor;
+
             }
+
+           
             getAllPoints(){
                 //returns a string with totalPointsFor and totalPointsAgainst
                 // "Points for XX and Points Against XX where XX is the values of the instance variables"
-            }
-        }
+
+                return "Points for " + this.totalPointsFor + "and Points Against " + this.totalPointsAgainst;
+            }}
+
+         
         // Place variable and object info here
         // Local Variables
         var aTeams = [];
         var aoTeams = [];
+
         
         for (i = 1; i <= 20; ++i)  {
             aTeams.push(document.getElementById("teamList").childNodes[i].innerHTML);
             i++;
         }
         // generate game results --> assign to arrays (this pretty much HW5 copy and past would be helpful)
-        for (var key in aTeams) {
+
+
+        // sort arrays
+
+        // document.getElementById("output").value = seasonResults  
+       for (var key in aTeams) {
                 var oTeam = new Team();
                 oTeam.teamName = aTeams[key];
                 aoTeams.push(oTeam);
+
          }
         console.log(aoTeams);
 
