@@ -27,6 +27,7 @@
     <p id="output"></p>    
     </form>
     <script>
+
          // Place variable and object info here
         // Local Variables
         var aTeams = [];
@@ -82,6 +83,7 @@
         }
 
         }
+
         // Build the child object extending Parent
         class BasketballTeam extends Team {
             /*** Define Attributes***/
@@ -96,30 +98,101 @@
             addPointsFor(pInt) {
                 //receives int parameter
                 // value is added to totalPointsFor instance variable;
+
                 this.totalPointsFor = pInt + this.totalPointsFor;
             }
             addPointsAgainst(pInt2){
                 // receives int parameter
                 //value added to totalPointsAgainst
                 this.totalPointsAgainst = pInt2 + this.totalPointsFor;
+
             }
+
+           
             getAllPoints(){
                 //returns a string with totalPointsFor and totalPointsAgainst
                 // "Points for XX and Points Against XX where XX is the values of the instance variables"
+
                 return "Points for " + this.totalPointsFor + "and Points Against " + this.totalPointsAgainst;
             }}
+
+         
+        // Place variable and object info here
+        // Local Variables
+        var aTeams = [];
+        var aoTeams = [];
+
         
-
-
-         function playGame(){
-        //      
+        for (i = 1; i <= 20; ++i)  {
+            aTeams.push(document.getElementById("teamList").childNodes[i].innerHTML);
+            i++;
+        }
         // generate game results --> assign to arrays (this pretty much HW5 copy and past would be helpful)
+
 
         // sort arrays
 
-        // document.getElementById("output").value = seasonResults    
-         }
+        // document.getElementById("output").value = seasonResults  
+       for (var key in aTeams) {
+                var oTeam = new Team();
+                oTeam.teamName = aTeams[key];
+                aoTeams.push(oTeam);
 
+         }
+        console.log(aoTeams);
+
+         function playGame(){
+            var numGames = ((aTeams.length - 1)*2);
+            var myTeamScores = [];
+
+            for (i=1;i<=numGames;i++) {
+                //create random score for 2 teams
+                teamName = aTeams[(i+1)];
+                var myScore = Math.floor(Math.random() * 101);
+                var theirScore = Math.floor(Math.random() * 101);
+            
+                //if game number is even, game is away--otherScore gets 5 points added
+                if (i % 2 == 0 && myScore != theirScore) {
+                    myScore = theirScore
+                    theirScore = theirScore + 5
+                }
+                //if game number is odd, game is home--teamScoree gets 5 points added
+                else if (myScore != theirScore) {
+                    myScore = myScore + 5 
+                    theirScore = theirScore
+                }
+                //if game is tied, play until someone wins, then add number of OTs to array
+                else {
+                    do {
+                    myScore = myScore + Math.floor(Math.random() * 16);
+                    theirScore = theirScore + Math.floor(Math.random() * 16);
+                    } while (myScore === theirScore);  
+                }
+            
+            
+                
+            //     for (iWin=0;iWin<numGames;iWin++) {
+            //         if (myTeamScores[iWin] > otherTeamScores[iWin]) {
+            //             wins = wins + 1
+            //         } 
+            //         else if (myTeamScores[iWin] < otherTeamScores[iWin]) {
+            //             losses = losses + 1
+            //         }
+            // } 
+
+             // sort arrays
+
+            // display results
+            console.log(aoTeams);
+            var output = "";
+            for (var key in aoTeams){
+                output += aoTeams[key].teamName + ": " + aoTeams[key].wins + "-" + aoTeams[key].losses + "</br>";
+                console.log(aoTeams) 
+            }   
+            document.getElementById("output").innerHTML = output
+        }
+    }
+       
     </script>
 </body>
 </html>
